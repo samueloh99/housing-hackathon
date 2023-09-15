@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.half-diagonal::before {
+  content: "";
+  @apply absolute top-0 left-0 w-full h-full bg-custom-orange;
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
+}
