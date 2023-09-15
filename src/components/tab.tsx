@@ -20,7 +20,7 @@ const Tab = ({ setScreen, screen }: TabProps) => {
     "border-b-2 border-[#3ca39d] text-[#3ca39d] cursor-pointer";
   return (
     <div className="font-medium text-[14px] mb-10 text-center">
-      <ul className="flex flex-wrap gap-7 border-b-2 border-gray-400">
+      <ul className="flex flex-wrap gap-7 border-gray-400">
         {options.map((item, key) => {
           return (
             <li

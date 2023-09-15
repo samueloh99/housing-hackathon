@@ -7,10 +7,15 @@ import Tab from "@/components/tab";
 import Table from "@/components/table";
 import { useEffect, useRef, useState } from "react";
 
+import { HiOutlineDocumentDuplicate } from "react-icons/hi";
+import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+
 import {
   MdKeyboardArrowLeft,
   MdKeyboardArrowRight,
 } from "react-icons/md";
+import TableBuilding from "@/components/table_building";
+import RoomType from "@/components/roomtype";
 
 interface FormDTO {
   name: string;
@@ -29,6 +34,7 @@ export default function Home() {
 
   const [amentDrawer, setAmentDrawer] = useState(false);
   const [buildingDrawer, setBuildingDrawer] = useState(false);
+  const [roomTypeDrawer, setRoomTypeDrawer] = useState(false);
 
   const [form, setForm] = useState<FormDTO>({
     name: "",
@@ -68,15 +74,22 @@ export default function Home() {
           setBuildingDrawer={setBuildingDrawer}
         />
       )}
+
+      {roomTypeDrawer && (
+        <RoomType
+          roomTypeDrawer={roomTypeDrawer}
+          setRoomTypeDrawer={setRoomTypeDrawer}
+        />
+      )}
       <div className="flex flex-col w-full gap-5">
-        <h1 className="font-bold text-[24px]">Trip Title</h1>
+        <h1 className="font-bold text-[24px]">Tripsha Housing</h1>
         <Tab screen={screen} setScreen={setScreen} />
         {openProperties > 0 && (
           <div className="flex flex-col gap-10">
             <div className="flex flex-row items-center w-full justify-between">
               <div className="flex flex-row justify-center items-center gap-5">
                 <div
-                  className="border border-gray-400 p-1 rounded-md cursor-pointer"
+                  className="border border-gray-200 p-1 rounded-md cursor-pointer"
                   onClick={() => setOpenProperties(0)}
                 >
                   <MdKeyboardArrowLeft size={20} />
@@ -89,7 +102,7 @@ export default function Home() {
                 <h1 className="text-red-600">Delete Property</h1>
               </div>
             </div>
-            <div className="flex flex-col w-full items-start p-5 justify-between border-2 border-gray-400 rounded-md h-full">
+            <div className="flex flex-col w-full items-start p-5 justify-between border border-gray-200 rounded-md h-full bg-gray-50">
               <h1 className="text-black font-bold">Property</h1>
               <div className="flex flex-col items-start mt-6">
                 <div className="flex flex-row items-center justify-center gap-5">
@@ -112,7 +125,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-full items-start gap-5 p-5 justify-between border-2 border-gray-400 rounded-md h-full">
+            <div className="flex flex-col w-full items-start p-5 justify-between border border-gray-200 rounded-md h-full bg-gray-50">
               <div className="flex flex-row items-center w-full justify-between">
                 <h1 className="text-black font-bold">Amentities</h1>
                 <h1
@@ -122,7 +135,7 @@ export default function Home() {
                   + Add Amentities
                 </h1>
               </div>
-              <div className="grid grid-cols-3 w-full gap-5">
+              <div className="mt-5 grid grid-cols-3 w-full gap-5">
                 <h1>AC</h1>
                 <h1>Sauna</h1>
                 <h1>Parking</h1>
@@ -131,7 +144,7 @@ export default function Home() {
                 <h1>Kitchen in room</h1>
               </div>
             </div>
-            <div className="flex flex-col w-full items-start gap-5 p-5 justify-between border-2 border-gray-400 rounded-md h-full">
+            <div className="flex flex-col w-full items-start gap-5 p-5 justify-between border border-gray-200 rounded-md h-full bg-gray-50">
               <div className="flex flex-row items-center w-full justify-between">
                 <h1 className="text-black font-bold">Buildings</h1>
                 <h1
@@ -142,21 +155,38 @@ export default function Home() {
                 </h1>
               </div>
               <div className="flex flex-col w-full gap-5">
-                <div className="flex w-full rounded-md border-2 border-gray-400 p-2 bg-white flex-row justify-between items-center">
-                  <h1>Building 1</h1>
-                  <div className="flex flex-row gap-2 items-center justify-center">
-                    <h1 className="px-3 border border-gray-400 rounded-md">
-                      Date
-                    </h1>
-                    <div className="flex items-center justify-center border border-gray-400 rounded-sm">
-                      <MdKeyboardArrowLeft size={20} />
-                    </div>
-                    <div className="flex items-center justify-center border border-gray-400 rounded-sm">
-                      <MdKeyboardArrowRight size={20} />
+                <div className="flex flex-col gap-5 w-full rounded-md border border-gray-200 p-2 bg-white flex-row justify-between items-center">
+                  <div className="flex flex-row w-full gap-2 items-center justify-between">
+                    <h1>Building ABC</h1>
+                    <div className="flex flex-row gap-2 items-center justify-center">
+                      <div className="flex flex-row items-center justify-center gap-2 p-3 text-red-400 rounded-md cursor-pointer">
+                        <AiOutlineDelete size={20} color="red" />
+                        Delete building
+                      </div>
+                      <div className="flex flex-row items-center justify-center gap-2 px-3 text-blue-400 rounded-md cursor-pointer">
+                        <HiOutlineDocumentDuplicate
+                          size={20}
+                          className="text-blue-400"
+                        />
+                        Duplicate
+                      </div>
+                      <div className="flex flex-row items-center justify-center gap-2 px-3 text-blue-400 rounded-md cursor-pointer">
+                        <AiOutlineEdit
+                          size={20}
+                          className="text-blue-400"
+                        />
+                        Edit
+                      </div>
+                      <div
+                        onClick={() => setRoomTypeDrawer(true)}
+                        className="px-3 border border-gray-200 rounded-md cursor-pointer"
+                      >
+                        + Room Type
+                      </div>
                     </div>
                   </div>
+                  <TableBuilding />
                 </div>
-                <Table />
               </div>
             </div>
           </div>
@@ -165,7 +195,7 @@ export default function Home() {
           <div className="flex flex-col gap-10">
             <div className="flex flex-row w-full justify-between items-center align-center">
               <input
-                className="border border-gray-400 text-black rounded-sm"
+                className="border border-gray-200 text-black rounded-sm p-2"
                 placeholder="input search text"
               />
               <button
@@ -198,7 +228,7 @@ export default function Home() {
                     return (
                       <div
                         key={key}
-                        className="flex flex-col gap-5 w-full p-5 border-2 border-gray-400 rounded-md h-full"
+                        className="flex flex-col gap-5 w-full p-5 border border-gray-200 bg-gray-50 rounded-md h-full"
                       >
                         <div className="flex w-full items-start justify-between">
                           <h1 className="text-[20px] font-bold">
@@ -212,7 +242,7 @@ export default function Home() {
                               onClick={() =>
                                 setOpenProperties(key + 1)
                               }
-                              className="cursor-pointer border-2 border-[#a3a3a3] bg-white p-2 rounded-sm"
+                              className="cursor-pointer border border-gray-200 bg-white p-2 rounded-sm"
                             >
                               Property details
                             </p>

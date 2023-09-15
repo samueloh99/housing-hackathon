@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 
+import { AiOutlineClose } from "react-icons/ai";
+
 interface DrawerProps {
   setOpenDrawer: (n: boolean) => void;
   openDrawer: boolean;
@@ -48,7 +50,7 @@ const Drawer = ({
   return (
     <div
       ref={drawerRef}
-      className={`border-l border-gray-400 ${
+      className={`border-l border-gray-200 ${
         openDrawer ? "fixed" : ""
       } top-0 right-0 z-40 h-screen p-4 bg-white w-80`}
     >
@@ -57,9 +59,9 @@ const Drawer = ({
           <h1 className="font-bold text-[20px]">Create property</h1>
           <h1
             onClick={() => setOpenDrawer(false)}
-            className="cursor-pointer flex h-[20px] w-[20px] font-bold items-center justify-center border-2 border-black rounded-full"
+            className="cursor-pointer flex p-[4px] font-bold items-center justify-center border border-gray-400 rounded-full"
           >
-            x
+            <AiOutlineClose size={15} />
           </h1>
         </div>
         <div className="flex flex-col gap-10 mt-10">
@@ -70,7 +72,7 @@ const Drawer = ({
               onChange={(e) =>
                 setForm({ ...form, name: e.target.value })
               }
-              className="text-black border border-gray-400 p-2 rounded-sm"
+              className="text-black border border-gray-200 p-2 rounded-sm"
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -80,7 +82,7 @@ const Drawer = ({
               onChange={(e) =>
                 setForm({ ...form, contact_name: e.target.value })
               }
-              className="text-black border border-gray-400 p-2 rounded-sm"
+              className="text-black border border-gray-200 p-2 rounded-sm"
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -90,7 +92,7 @@ const Drawer = ({
               onChange={(e) =>
                 setForm({ ...form, phone: e.target.value })
               }
-              className="text-black border border-gray-400 p-2 rounded-sm"
+              className="text-black border border-gray-200 p-2 rounded-sm"
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -102,7 +104,7 @@ const Drawer = ({
               onChange={(e) =>
                 setForm({ ...form, address: e.target.value })
               }
-              className="text-black border border-gray-400 p-2 rounded-sm"
+              className="text-black border border-gray-200 p-2 rounded-sm"
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -112,7 +114,7 @@ const Drawer = ({
               onChange={(e) =>
                 setForm({ ...form, date: e.target.value })
               }
-              className="text-black border border-gray-400 p-2 rounded-sm"
+              className="text-black border border-gray-200 p-2 rounded-sm"
             />
           </div>
         </div>
@@ -122,7 +124,7 @@ const Drawer = ({
         {/* Added mt-4 for a little margin on top */}
         <button
           onClick={() => setOpenDrawer(false)}
-          className="border border-gray-600 text-gray-600 rounded-sm px-5 py-2"
+          className="border border-gray-200 text-gray-600 rounded-sm px-5 py-2"
         >
           Cancel
         </button>

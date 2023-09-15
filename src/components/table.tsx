@@ -32,7 +32,7 @@ const Table = () => {
         </thead>
         <tbody>
           <tr className="border border-gray-400">
-            <td className="border border-gray-400" rowSpan={5}>
+            <td className="border border-gray-400 pl-4" rowSpan={5}>
               Building A
             </td>
             <td className="border border-gray-400 bg-[#f9f0ff] p-2">
@@ -130,7 +130,7 @@ const Table = () => {
             <td className="border border-gray-400"></td>
           </tr>
           <tr className="border border-gray-400">
-            <td className="border border-gray-400" rowSpan={5}>
+            <td className="border border-gray-400 pl-4" rowSpan={5}>
               Building A
             </td>
             <td className="border border-gray-400 bg-[#f9f0ff] p-2">
