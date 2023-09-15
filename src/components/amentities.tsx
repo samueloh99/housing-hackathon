@@ -123,7 +123,7 @@ const Amentities = ({ amentDrawer, setAmentDrawer }: DrawerProps) => {
       <div className="flex flex-row gap-5 justify-end mt-4">
         <button
           onClick={() => setAmentDrawer(false)}
-          className="border border-gray-200 text-gray-600 rounded-sm px-5 py-2"
+          className="border border-gray-200 text-gray-600 rounded-md px-5 py-2"
         >
           Cancel
         </button>
@@ -131,7 +131,7 @@ const Amentities = ({ amentDrawer, setAmentDrawer }: DrawerProps) => {
           onClick={() => {
             setAmentDrawer(false);
           }}
-          className="bg-[#3ca39d] text-white rounded-sm px-5 py-2"
+          className="bg-[#3ca39d] text-white rounded-md px-5 py-2"
         >
           Create
         </button>

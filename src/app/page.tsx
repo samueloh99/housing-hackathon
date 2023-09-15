@@ -48,6 +48,8 @@ export default function Home() {
 
   const [openProperties, setOpenProperties] = useState(0);
 
+  const [counter, setCounter] = useState([0]);
+
   const active =
     "border-b-2 border-[#3ca39d] text-[#3ca39d] cursor-pointer";
   return (
@@ -77,6 +79,7 @@ export default function Home() {
 
       {roomTypeDrawer && (
         <RoomType
+          setCounter={setCounter}
           roomTypeDrawer={roomTypeDrawer}
           setRoomTypeDrawer={setRoomTypeDrawer}
         />
@@ -130,7 +133,7 @@ export default function Home() {
                 <h1 className="text-black font-bold">Amentities</h1>
                 <h1
                   onClick={() => setAmentDrawer(true)}
-                  className="text-blue-600"
+                  className="text-blue-600 cursor-pointer hover:text-blue-400 transition-[2s]"
                 >
                   + Add Amentities
                 </h1>
@@ -149,45 +152,65 @@ export default function Home() {
                 <h1 className="text-black font-bold">Buildings</h1>
                 <h1
                   onClick={() => setBuildingDrawer(true)}
-                  className="text-blue-600"
+                  className="text-blue-600 cursor-pointer hover:text-blue-400 transition-[2s]"
                 >
                   + Add Building
                 </h1>
               </div>
-              <div className="flex flex-col w-full gap-5">
-                <div className="flex flex-col gap-5 w-full rounded-md border border-gray-200 p-2 bg-white flex-row justify-between items-center">
-                  <div className="flex flex-row w-full gap-2 items-center justify-between">
-                    <h1>Building ABC</h1>
-                    <div className="flex flex-row gap-2 items-center justify-center">
-                      <div className="flex flex-row items-center justify-center gap-2 p-3 text-red-400 rounded-md cursor-pointer">
-                        <AiOutlineDelete size={20} color="red" />
-                        Delete building
+              {counter.map((item, key) => {
+                return (
+                  <div
+                    className="flex flex-col w-full gap-5"
+                    key={key}
+                  >
+                    <div className="flex flex-col gap-5 w-full rounded-md border border-gray-200 p-2 bg-white flex-row justify-between items-center">
+                      <div className="flex flex-row w-full gap-2 items-center justify-between">
+                        <h1>Building ABC</h1>
+                        <div className="flex flex-row gap-2 items-center justify-center">
+                          <div
+                            onClick={() => {
+                              if (counter.length === 0) return;
+                              const newCounter = [...counter];
+                              newCounter.splice(0, 1);
+                              setCounter(newCounter);
+                            }}
+                            className="flex flex-row items-center justify-center gap-2 p-3 text-red-400 rounded-md cursor-pointer"
+                          >
+                            <AiOutlineDelete size={20} color="red" />
+                            Delete building
+                          </div>
+                          <div
+                            className="flex flex-row items-center justify-center gap-2 px-3 text-blue-400 rounded-md cursor-pointer"
+                            onClick={() =>
+                              setCounter((prev) => [...prev, 1])
+                            }
+                          >
+                            <HiOutlineDocumentDuplicate
+                              size={20}
+                              className="text-blue-400"
+                            />
+                            Duplicate
+                          </div>
+                          <div className="flex flex-row items-center justify-center gap-2 px-3 text-blue-400 rounded-md cursor-pointer">
+                            <AiOutlineEdit
+                              size={20}
+                              className="text-blue-400"
+                            />
+                            Edit
+                          </div>
+                          <div
+                            onClick={() => setRoomTypeDrawer(true)}
+                            className="px-3 border border-gray-200 rounded-md cursor-pointer"
+                          >
+                            + Room Type
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex flex-row items-center justify-center gap-2 px-3 text-blue-400 rounded-md cursor-pointer">
-                        <HiOutlineDocumentDuplicate
-                          size={20}
-                          className="text-blue-400"
-                        />
-                        Duplicate
-                      </div>
-                      <div className="flex flex-row items-center justify-center gap-2 px-3 text-blue-400 rounded-md cursor-pointer">
-                        <AiOutlineEdit
-                          size={20}
-                          className="text-blue-400"
-                        />
-                        Edit
-                      </div>
-                      <div
-                        onClick={() => setRoomTypeDrawer(true)}
-                        className="px-3 border border-gray-200 rounded-md cursor-pointer"
-                      >
-                        + Room Type
-                      </div>
+                      <TableBuilding />
                     </div>
                   </div>
-                  <TableBuilding />
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
         )}
@@ -195,11 +218,11 @@ export default function Home() {
           <div className="flex flex-col gap-10">
             <div className="flex flex-row w-full justify-between items-center align-center">
               <input
-                className="border border-gray-200 text-black rounded-sm p-2"
+                className="border border-gray-200 text-black rounded-md p-2"
                 placeholder="input search text"
               />
               <button
-                className="bg-blue-600 py-2 px-3 rounded-sm text-white"
+                className="bg-blue-600 py-2 px-3 rounded-md text-white"
                 onClick={() => setOpenDrawer(!openDrawer)}
               >
                 + Property
@@ -242,7 +265,7 @@ export default function Home() {
                               onClick={() =>
                                 setOpenProperties(key + 1)
                               }
-                              className="cursor-pointer border border-gray-200 bg-white p-2 rounded-sm"
+                              className="cursor-pointer border border-gray-200 bg-white p-2 rounded-md"
                             >
                               Property details
                             </p>

@@ -4,11 +4,13 @@ import { AiOutlineClose } from "react-icons/ai";
 interface DrawerProps {
   roomTypeDrawer: boolean;
   setRoomTypeDrawer: (x: boolean) => void;
+  setCounter: (x: any) => void;
 }
 
 const RoomType = ({
   roomTypeDrawer,
   setRoomTypeDrawer,
+  setCounter,
 }: DrawerProps) => {
   const drawerRef = useRef(null);
 
@@ -32,7 +34,7 @@ const RoomType = ({
   return (
     <div
       ref={drawerRef}
-      className={`border-l border-gray-200 ${
+      className={`flex flex-col border-l border-gray-200 ${
         roomTypeDrawer ? "fixed" : ""
       } top-0 right-0 z-40 h-screen p-4 bg-white w-80 overflow-scroll`}
     >
@@ -57,14 +59,14 @@ const RoomType = ({
             <h1 className="text-[15px]">Room type name</h1>
             <input
               placeholder="Deluxe Cabin"
-              className="px-2 text-black border border-gray-200 rounded-sm h-[40px] w-full"
+              className="px-2 text-black border border-gray-200 rounded-md h-[40px] w-full"
             />
           </div>
           <div className="flex flex-col w-full items-start justify-between cursor-pointer gap-4">
             <h1 className="text-[15px]">Start and end date</h1>
             <input
               placeholder="2020-11-08 -> 2020-12-23"
-              className="px-2 text-black border border-gray-200 rounded-sm h-[40px] w-full"
+              className="px-2 text-black border border-gray-200 rounded-md h-[40px] w-full"
             />
           </div>
           <div className="flex flex-col max-w-full w-full items-start justify-between cursor-pointer gap-4">
@@ -72,11 +74,11 @@ const RoomType = ({
             <div className="flex flex-row gap-2 w-full">
               <input
                 placeholder="1"
-                className="text-black text-center border border-gray-200 rounded-sm w-1/5 h-[40px]"
+                className="text-black text-center border border-gray-200 rounded-md w-1/5 h-[40px]"
               />
               <input
                 placeholder="Queen Bed"
-                className="px-2 text-black border border-gray-200 rounded-sm w-4/5 h-[40px]"
+                className="px-2 text-black border border-gray-200 rounded-md w-4/5 h-[40px]"
               />
             </div>
             <h1 className="text-[13px] text-gray-400">
@@ -87,7 +89,7 @@ const RoomType = ({
             <h1 className="text-[15px]">No. of rooms of this type</h1>
             <input
               placeholder="2"
-              className="px-2 text-black border border-gray-200 rounded-sm h-[40px] w-full"
+              className="px-2 text-black border border-gray-200 rounded-md h-[40px] w-full"
             />
           </div>
         </div>
@@ -95,15 +97,16 @@ const RoomType = ({
       <div className="flex flex-row gap-5 justify-end mt-4">
         <button
           onClick={() => setRoomTypeDrawer(false)}
-          className="border border-gray-200 text-gray-600 rounded-sm px-5 py-2"
+          className="border border-gray-200 text-gray-600 rounded-md px-5 py-2"
         >
           Cancel
         </button>
         <button
           onClick={() => {
             setRoomTypeDrawer(false);
+            setCounter((prev: any) => [...prev, 1]);
           }}
-          className="bg-[#3ca39d] text-white rounded-sm px-5 py-2"
+          className="bg-[#3ca39d] text-white rounded-md px-5 py-2"
         >
           Create
         </button>

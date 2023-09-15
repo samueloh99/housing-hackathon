@@ -32,7 +32,7 @@ const Building = ({
   return (
     <div
       ref={drawerRef}
-      className={`border-l border-gray-200 ${
+      className={`flex flex-col border-l border-gray-200 ${
         buildingDrawer ? "fixed" : ""
       } top-0 right-0 z-40 h-screen p-4 bg-white w-80 overflow-scroll`}
     >
@@ -49,14 +49,14 @@ const Building = ({
         <div className="flex w-full gap-2 mt-10">
           <div className="flex flex-col w-full items-start justify-between cursor-pointer">
             <h1 className="text-[17px] font-bold">Building name</h1>
-            <input className="text-black border border-gray-200 p-2 rounded-sm" />
+            <input className="text-black border border-gray-200 p-2 rounded-md" />
           </div>
         </div>
       </div>
       <div className="flex flex-row gap-5 justify-end mt-4">
         <button
           onClick={() => setBuildingDrawer(false)}
-          className="border border-gray-200 text-gray-600 rounded-sm px-5 py-2"
+          className="border border-gray-200 text-gray-600 rounded-md px-5 py-2"
         >
           Cancel
         </button>
@@ -64,7 +64,7 @@ const Building = ({
           onClick={() => {
             setBuildingDrawer(false);
           }}
-          className="bg-[#3ca39d] text-white rounded-sm px-5 py-2"
+          className="bg-[#3ca39d] text-white rounded-md px-5 py-2"
         >
           Create
         </button>

@@ -72,7 +72,7 @@ const Drawer = ({
               onChange={(e) =>
                 setForm({ ...form, name: e.target.value })
               }
-              className="text-black border border-gray-200 p-2 rounded-sm"
+              className="text-black border border-gray-200 p-2 rounded-md"
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -82,7 +82,7 @@ const Drawer = ({
               onChange={(e) =>
                 setForm({ ...form, contact_name: e.target.value })
               }
-              className="text-black border border-gray-200 p-2 rounded-sm"
+              className="text-black border border-gray-200 p-2 rounded-md"
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -92,7 +92,7 @@ const Drawer = ({
               onChange={(e) =>
                 setForm({ ...form, phone: e.target.value })
               }
-              className="text-black border border-gray-200 p-2 rounded-sm"
+              className="text-black border border-gray-200 p-2 rounded-md"
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -104,7 +104,7 @@ const Drawer = ({
               onChange={(e) =>
                 setForm({ ...form, address: e.target.value })
               }
-              className="text-black border border-gray-200 p-2 rounded-sm"
+              className="text-black border border-gray-200 p-2 rounded-md"
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -114,7 +114,7 @@ const Drawer = ({
               onChange={(e) =>
                 setForm({ ...form, date: e.target.value })
               }
-              className="text-black border border-gray-200 p-2 rounded-sm"
+              className="text-black border border-gray-200 p-2 rounded-md"
             />
           </div>
         </div>
@@ -124,7 +124,7 @@ const Drawer = ({
         {/* Added mt-4 for a little margin on top */}
         <button
           onClick={() => setOpenDrawer(false)}
-          className="border border-gray-200 text-gray-600 rounded-sm px-5 py-2"
+          className="border border-gray-200 text-gray-600 rounded-md px-5 py-2"
         >
           Cancel
         </button>
@@ -140,7 +140,7 @@ const Drawer = ({
               phone: "",
             });
           }}
-          className="bg-[#3ca39d] text-white rounded-sm px-5 py-2"
+          className="bg-[#3ca39d] text-white rounded-md px-5 py-2"
         >
           Create
         </button>
