@@ -15,7 +15,7 @@ interface TabProps {
   screen: number;
 }
 
-const Tab = ({ setScreen, screen }: TabProps) => {
+const MainTab = ({ setScreen, screen }: TabProps) => {
   const active =
     "border-b-2 border-[#3ca39d] text-[#3ca39d] cursor-pointer";
   return (
@@ -37,4 +37,4 @@ const Tab = ({ setScreen, screen }: TabProps) => {
   );
 };
 
-export default Tab;
+export default MainTab;

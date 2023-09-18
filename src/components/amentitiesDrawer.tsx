@@ -7,7 +7,10 @@ interface DrawerProps {
   setAmentDrawer: (x: boolean) => void;
 }
 
-const Amentities = ({ amentDrawer, setAmentDrawer }: DrawerProps) => {
+const AmentitiesDrawer = ({
+  amentDrawer,
+  setAmentDrawer,
+}: DrawerProps) => {
   const drawerRef = useRef(null);
 
   useEffect(() => {
@@ -140,4 +143,4 @@ const Amentities = ({ amentDrawer, setAmentDrawer }: DrawerProps) => {
   );
 };
 
-export default Amentities;
+export default AmentitiesDrawer;

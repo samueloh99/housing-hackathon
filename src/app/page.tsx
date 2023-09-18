@@ -1,21 +1,18 @@
 "use client";
 
-import Amentities from "@/components/amentities";
-import Building from "@/components/building";
-import Drawer from "@/components/drawer";
-import Tab from "@/components/tab";
-import Table from "@/components/table";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 import { HiOutlineDocumentDuplicate } from "react-icons/hi";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { MdKeyboardArrowLeft } from "react-icons/md";
 
-import {
-  MdKeyboardArrowLeft,
-  MdKeyboardArrowRight,
-} from "react-icons/md";
+import AmentitiesDrawer from "@/components/amentitiesDrawer";
+import BuildingDrawer from "@/components/buildingDrawer";
+import PropertyDrawer from "@/components/propertyDrawer";
+import RoomTypeDrawer from "@/components/roomtypeDrawer";
+import MainTab from "@/components/maintab";
+import Table from "@/components/table";
 import TableBuilding from "@/components/table_building";
-import RoomType from "@/components/roomtype";
 
 interface FormDTO {
   name: string;
@@ -55,7 +52,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {openDrawer && (
-        <Drawer
+        <PropertyDrawer
           form={form}
           openDrawer={openDrawer}
           setForm={setForm}
@@ -64,21 +61,21 @@ export default function Home() {
         />
       )}
       {amentDrawer && (
-        <Amentities
+        <AmentitiesDrawer
           amentDrawer={amentDrawer}
           setAmentDrawer={setAmentDrawer}
         />
       )}
 
       {buildingDrawer && (
-        <Building
+        <BuildingDrawer
           buildingDrawer={buildingDrawer}
           setBuildingDrawer={setBuildingDrawer}
         />
       )}
 
       {roomTypeDrawer && (
-        <RoomType
+        <RoomTypeDrawer
           setCounter={setCounter}
           roomTypeDrawer={roomTypeDrawer}
           setRoomTypeDrawer={setRoomTypeDrawer}
@@ -86,7 +83,7 @@ export default function Home() {
       )}
       <div className="flex flex-col w-full gap-5">
         <h1 className="font-bold text-[24px]">Tripsha Housing</h1>
-        <Tab screen={screen} setScreen={setScreen} />
+        <MainTab screen={screen} setScreen={setScreen} />
         {openProperties > 0 && (
           <div className="flex flex-col gap-10">
             <div className="flex flex-row items-center w-full justify-between">

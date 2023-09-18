@@ -18,7 +18,7 @@ interface FormDTO {
   date: string;
 }
 
-const Drawer = ({
+const PropertyDrawer = ({
   setOpenDrawer,
   openDrawer,
   setForm,
@@ -149,4 +149,4 @@ const Drawer = ({
   );
 };
 
-export default Drawer;
+export default PropertyDrawer;

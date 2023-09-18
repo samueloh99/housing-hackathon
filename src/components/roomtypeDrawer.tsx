@@ -7,7 +7,7 @@ interface DrawerProps {
   setCounter: (x: any) => void;
 }
 
-const RoomType = ({
+const RoomTypeDrawer = ({
   roomTypeDrawer,
   setRoomTypeDrawer,
   setCounter,
@@ -115,4 +115,4 @@ const RoomType = ({
   );
 };
 
-export default RoomType;
+export default RoomTypeDrawer;

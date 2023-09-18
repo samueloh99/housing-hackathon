@@ -6,7 +6,7 @@ interface DrawerProps {
   setBuildingDrawer: (x: boolean) => void;
 }
 
-const Building = ({
+const BuildingDrawer = ({
   buildingDrawer,
   setBuildingDrawer,
 }: DrawerProps) => {
@@ -73,4 +73,4 @@ const Building = ({
   );
 };
 
-export default Building;
+export default BuildingDrawer;
