@@ -4,13 +4,11 @@ import { AiOutlineClose } from "react-icons/ai";
 interface DrawerProps {
   roomTypeDrawer: boolean;
   setRoomTypeDrawer: (x: boolean) => void;
-  setCounter: (x: any) => void;
 }
 
 const RoomTypeDrawer = ({
   roomTypeDrawer,
   setRoomTypeDrawer,
-  setCounter,
 }: DrawerProps) => {
   const drawerRef = useRef(null);
 
@@ -104,7 +102,6 @@ const RoomTypeDrawer = ({
         <button
           onClick={() => {
             setRoomTypeDrawer(false);
-            setCounter((prev: any) => [...prev, 1]);
           }}
           className="bg-[#3ca39d] text-white rounded-md px-5 py-2"
         >
