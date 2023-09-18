@@ -7,43 +7,43 @@ import BuildingDrawer from "@/components/buildingDrawer";
 import PropertyDrawer from "@/components/propertyDrawer";
 import RoomTypeDrawer from "@/components/roomtypeDrawer";
 import MainTab from "@/components/maintab";
-import Table from "@/components/table";
 import BuildingDetails from "@/components/buildingDetails";
 import BuildingCard from "@/components/buildingCard";
-
-interface FormDTO {
-  name: string;
-  contact_name: string;
-  phone: string;
-  address: string;
-  date: string;
-}
+import { PropertyType } from "@/types/Property";
 
 export default function Home() {
   const [screen, setScreen] = useState(1);
 
-  const [tab, setTab] = useState(1);
-
   const [openDrawer, setOpenDrawer] = useState(false);
-
   const [amentDrawer, setAmentDrawer] = useState(false);
   const [buildingDrawer, setBuildingDrawer] = useState(false);
   const [roomTypeDrawer, setRoomTypeDrawer] = useState(false);
 
-  const [form, setForm] = useState<FormDTO>({
-    name: "",
-    contact_name: "",
-    phone: "",
-    address: "",
-    date: "",
+  const [form, setForm] = useState<PropertyType>({
+    amenities: [],
+    availableDates: "",
+    contactName: "",
+    phoneNumber: "",
+    physicalAddress: "",
+    propertyName: "",
+    buildings: [
+      {
+        beds: [
+          {
+            name: "",
+            quantity: 0,
+          },
+        ],
+        roomName: "",
+        roomType: "",
+      },
+    ],
   });
 
-  const [properties, setProperties] = useState<FormDTO[]>([]);
+  const [properties, setProperties] = useState<PropertyType[]>([]);
 
   const [openProperties, setOpenProperties] = useState(0);
 
-  const active =
-    "border-b-2 border-[#3ca39d] text-[#3ca39d] cursor-pointer";
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {openDrawer && (
@@ -55,10 +55,14 @@ export default function Home() {
           setProperties={setProperties}
         />
       )}
+
       {amentDrawer && (
         <AmentitiesDrawer
           amentDrawer={amentDrawer}
           setAmentDrawer={setAmentDrawer}
+          setProperties={setProperties}
+          openProperties={openProperties}
+          properties={properties}
         />
       )}
 
@@ -75,6 +79,7 @@ export default function Home() {
           setRoomTypeDrawer={setRoomTypeDrawer}
         />
       )}
+
       <div className="flex flex-col w-full gap-5">
         <h1 className="font-bold text-[24px]">Tripsha Housing</h1>
         <MainTab screen={screen} setScreen={setScreen} />
@@ -103,22 +108,6 @@ export default function Home() {
               </button>
             </div>
             <div className="flex flex-col">
-              <div className="font-medium text-[14px] text-center">
-                <ul className="flex flex-wrap gap-7">
-                  <li
-                    className={tab === 1 ? active : "cursor-pointer"}
-                    onClick={() => setTab(1)}
-                  >
-                    Property
-                  </li>
-                  <li
-                    className={tab === 2 ? active : "cursor-pointer"}
-                    onClick={() => setTab(2)}
-                  >
-                    People
-                  </li>
-                </ul>
-              </div>
               {properties.length > 0 ? (
                 <div className="flex flex-col min-h-[70vh] py-10 justify-start items-center w-full gap-5">
                   {properties.map((item, key) => {

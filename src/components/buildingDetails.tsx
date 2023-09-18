@@ -2,22 +2,16 @@ import { MdKeyboardArrowLeft } from "react-icons/md";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { HiOutlineDocumentDuplicate } from "react-icons/hi";
 import TableBuilding from "./table_building";
+import { PropertyType } from "@/types/Property";
+import { amenities } from "@/data/mockdata";
 
 interface BuildingCardProps {
   setOpenProperties: (x: number) => void;
-  properties: FormDTO[];
+  properties: PropertyType[];
   openProperties: number;
   setAmentDrawer: (x: boolean) => void;
   setBuildingDrawer: (x: boolean) => void;
   setRoomTypeDrawer: (x: boolean) => void;
-}
-
-interface FormDTO {
-  name: string;
-  contact_name: string;
-  phone: string;
-  address: string;
-  date: string;
 }
 
 const BuildingDetails = ({
@@ -28,6 +22,7 @@ const BuildingDetails = ({
   setBuildingDrawer,
   setRoomTypeDrawer,
 }: BuildingCardProps) => {
+  const propertyInfo = properties[openProperties - 1];
   return (
     <div className="flex flex-col gap-10">
       <div className="flex flex-row items-center w-full justify-between">
@@ -39,7 +34,7 @@ const BuildingDetails = ({
             <MdKeyboardArrowLeft size={20} />
           </div>
           <h1 className="text-black font-bold">
-            Property {properties[openProperties - 1].name}
+            Property {propertyInfo.propertyName}
           </h1>
         </div>
         <div className="flex flex-row justify-center items-center gap-5">
@@ -47,43 +42,48 @@ const BuildingDetails = ({
         </div>
       </div>
       <div className="flex flex-col w-full items-start p-5 justify-between border border-gray-200 rounded-md h-full bg-gray-50">
-        <h1 className="text-black font-bold">Property</h1>
+        <h1 className="text-black font-bold">Property Info.</h1>
         <div className="flex flex-col items-start mt-6">
           <div className="flex flex-row items-center justify-center gap-5">
             <h1 className="font-bold">Contact Name:</h1>
-            <h1>{properties[openProperties - 1].contact_name}</h1>
+            <h1>{propertyInfo.contactName}</h1>
           </div>
           <div className="flex flex-row items-center justify-center gap-5">
             <h1 className="font-bold">Phone Number:</h1>
-            <h1>{properties[openProperties - 1].phone}</h1>
+            <h1>{propertyInfo.phoneNumber}</h1>
           </div>
           <div className="flex flex-row items-center justify-center gap-5">
             <h1 className="font-bold">Physical Address:</h1>
-            <h1>{properties[openProperties - 1].address}</h1>
+            <h1>{propertyInfo.physicalAddress}</h1>
           </div>
           <div className="flex flex-row items-center justify-center gap-5">
             <h1 className="font-bold">Available Dates:</h1>
-            <h1>{properties[openProperties - 1].date}</h1>
+            <h1>{propertyInfo.availableDates}</h1>
           </div>
         </div>
       </div>
       <div className="flex flex-col w-full items-start p-5 justify-between border border-gray-200 rounded-md h-full bg-gray-50">
         <div className="flex flex-row items-center w-full justify-between">
-          <h1 className="text-black font-bold">Amentities</h1>
+          <h1 className="text-black font-bold">Amenities</h1>
           <h1
             onClick={() => setAmentDrawer(true)}
             className="text-blue-600 cursor-pointer hover:text-blue-400 transition-[2s]"
           >
-            + Add Amentities
+            + Add Amenities
           </h1>
         </div>
         <div className="mt-5 grid grid-cols-3 w-full gap-5">
-          <h1>AC</h1>
-          <h1>Sauna</h1>
-          <h1>Parking</h1>
-          <h1>BBQ Area</h1>
-          <h1>Bar</h1>
-          <h1>Kitchen in room</h1>
+          {propertyInfo.amenities.length > 0 ? (
+            amenities
+              .filter((amenity) =>
+                propertyInfo.amenities.includes(amenity.id)
+              )
+              .map((filteredAmenity, key) => {
+                return <h1 key={key}>{filteredAmenity.name}</h1>;
+              })
+          ) : (
+            <h1>No Amenity</h1>
+          )}
         </div>
       </div>
       <div className="flex flex-col w-full items-start gap-5 p-5 justify-between border border-gray-200 rounded-md h-full bg-gray-50">

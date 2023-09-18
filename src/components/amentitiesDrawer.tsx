@@ -1,17 +1,48 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsCheckCircleFill, BsCheckCircle } from "react-icons/bs";
 
+import { amenities } from "@/data/mockdata";
+import { PropertyType } from "@/types/Property";
 interface DrawerProps {
   amentDrawer: boolean;
   setAmentDrawer: (x: boolean) => void;
+  setProperties: (x: PropertyType[]) => void;
+  properties: PropertyType[];
+  openProperties: number;
 }
 
 const AmentitiesDrawer = ({
   amentDrawer,
   setAmentDrawer,
+  setProperties,
+  openProperties,
+  properties,
 }: DrawerProps) => {
-  const drawerRef = useRef(null);
+  const drawerRef = useRef<HTMLDivElement | null>(null);
+
+  const [selectedAmenities, setSelectedAmenities] = useState<
+    number[]
+  >([]);
+
+  const handleIconClick = (amenityId: number) => {
+    setSelectedAmenities((prevSelected) => {
+      if (prevSelected.includes(amenityId)) {
+        return prevSelected.filter((id) => id !== amenityId);
+      } else {
+        return [...prevSelected, amenityId];
+      }
+    });
+  };
+
+  const handleCreateAmenities = () => {
+    const updatedProperties = [...properties];
+    const newProperty = updatedProperties[openProperties - 1];
+    newProperty.amenities = selectedAmenities;
+
+    setProperties(updatedProperties);
+    setAmentDrawer(false);
+  };
 
   useEffect(() => {
     function handleClickOutside(event: any) {
@@ -28,6 +59,12 @@ const AmentitiesDrawer = ({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+  }, []);
+
+  useEffect(() => {
+    const currentPropertyAmenities =
+      properties[openProperties - 1].amenities || [];
+    setSelectedAmenities(currentPropertyAmenities);
   }, []);
 
   return (
@@ -48,79 +85,23 @@ const AmentitiesDrawer = ({
           </h1>
         </div>
         <div className="flex flex-col w-full gap-2 mt-10">
-          <div className="flex w-full border-b border-gray-200 py-3 items-center justify-between cursor-pointer">
-            <h1 className="text-[15px] font-medium">
-              Kitchen in room
-            </h1>
-            <BsCheckCircleFill size={20} />
-          </div>
-          <div className="flex w-full border-b border-gray-200 py-3 items-center justify-between cursor-pointer">
-            <h1 className="text-[15px] font-medium">
-              Laundry on site
-            </h1>
-            <BsCheckCircle size={20} />
-          </div>
-          <div className="flex w-full border-b border-gray-200 py-3 items-center justify-between cursor-pointer">
-            <h1 className="text-[15px] font-medium">
-              Dedicated workspace
-            </h1>
-            <BsCheckCircle size={20} />
-          </div>
-          <div className="flex w-full border-b border-gray-200 py-3 items-center justify-between cursor-pointer">
-            <h1 className="text-[15px] font-medium">Meeting rooms</h1>
-            <BsCheckCircleFill size={20} />
-          </div>
-          <div className="flex w-full border-b border-gray-200 py-3 items-center justify-between cursor-pointer">
-            <h1 className="text-[15px] font-medium">Restaurants</h1>
-            <BsCheckCircle size={20} />
-          </div>
-          <div className="flex w-full border-b border-gray-200 py-3 items-center justify-between cursor-pointer">
-            <h1 className="text-[15px] font-medium">Bar</h1>
-            <BsCheckCircleFill size={20} />
-          </div>
-          <div className="flex w-full border-b border-gray-200 py-3 items-center justify-between cursor-pointer">
-            <h1 className="text-[15px] font-medium">Rooftop space</h1>
-            <BsCheckCircle size={20} />
-          </div>
-          <div className="flex w-full border-b border-gray-200 py-3 items-center justify-between cursor-pointer">
-            <h1 className="text-[15px] font-medium">Swimming pool</h1>
-            <BsCheckCircle size={20} />
-          </div>
-          <div className="flex w-full border-b border-gray-200 py-3 items-center justify-between cursor-pointer">
-            <h1 className="text-[15px] font-medium">Sauna</h1>
-            <BsCheckCircleFill size={20} />
-          </div>
-          <div className="flex w-full border-b border-gray-200 py-3 items-center justify-between cursor-pointer">
-            <h1 className="text-[15px] font-medium">
-              Airport transfer
-            </h1>
-            <BsCheckCircleFill size={20} />
-          </div>
-          <div className="flex w-full border-b border-gray-200 py-3 items-center justify-between cursor-pointer">
-            <h1 className="text-[15px] font-medium">BBQ area</h1>
-            <BsCheckCircleFill size={20} />
-          </div>
-          <div className="flex w-full border-b border-gray-200 py-3 items-center justify-between cursor-pointer">
-            <h1 className="text-[15px] font-medium">AC</h1>
-            <BsCheckCircleFill size={20} />
-          </div>
-          <div className="flex w-full border-b border-gray-200 py-3 items-center justify-between cursor-pointer">
-            <h1 className="text-[15px] font-medium">Balconies</h1>
-            <BsCheckCircleFill size={20} />
-          </div>
-          <div className="flex w-full border-b border-gray-200 py-3 items-center justify-between cursor-pointer">
-            <h1 className="text-[15px] font-medium">Free parking</h1>
-            <BsCheckCircleFill size={20} />
-          </div>
-          <div className="flex w-full border-b border-gray-200 py-3 items-center justify-between cursor-pointer">
-            <h1 className="text-[15px] font-medium">Parking</h1>
-            <BsCheckCircle size={20} />
-          </div>
-
-          <div className="flex w-full border-b border-gray-200 py-3 items-center justify-between cursor-pointer">
-            <h1 className="text-[15px] font-medium">Wifi</h1>
-            <BsCheckCircle size={20} />
-          </div>
+          {amenities.map((item, key) => {
+            return (
+              <div
+                key={key}
+                className="flex w-full border-b border-gray-200 py-3 items-center justify-between cursor-pointer"
+                onClick={() => handleIconClick(item.id)}
+                style={{ cursor: "pointer" }}
+              >
+                <span>{item.name}</span>
+                {selectedAmenities.includes(item.id) ? (
+                  <BsCheckCircleFill />
+                ) : (
+                  <BsCheckCircle />
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
       <div className="flex flex-row gap-5 justify-end mt-4">
@@ -131,9 +112,7 @@ const AmentitiesDrawer = ({
           Cancel
         </button>
         <button
-          onClick={() => {
-            setAmentDrawer(false);
-          }}
+          onClick={() => handleCreateAmenities()}
           className="bg-[#3ca39d] text-white rounded-md px-5 py-2"
         >
           Create

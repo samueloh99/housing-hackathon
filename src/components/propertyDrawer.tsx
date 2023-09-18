@@ -2,20 +2,13 @@ import { useEffect, useRef } from "react";
 
 import { AiOutlineClose } from "react-icons/ai";
 
+import { PropertyType } from "@/types/Property";
 interface DrawerProps {
   setOpenDrawer: (n: boolean) => void;
   openDrawer: boolean;
-  form: FormDTO;
-  setForm: (n: FormDTO) => void;
+  form: PropertyType;
+  setForm: (n: PropertyType) => void;
   setProperties: (x: any) => void;
-}
-
-interface FormDTO {
-  name: string;
-  contact_name: string;
-  phone: string;
-  address: string;
-  date: string;
 }
 
 const PropertyDrawer = ({
@@ -25,10 +18,9 @@ const PropertyDrawer = ({
   form,
   setProperties,
 }: DrawerProps) => {
-  const drawerRef = useRef(null);
+  const drawerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // This function checks if the click is outside the drawer
     function handleClickOutside(event: any) {
       if (
         drawerRef.current &&
@@ -37,15 +29,11 @@ const PropertyDrawer = ({
         setOpenDrawer(false);
       }
     }
-
-    // Attach the click outside checker function to the document click event
     document.addEventListener("mousedown", handleClickOutside);
-
-    // Return a cleanup function to remove the event listener when the component is unmounted
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []); // Empty dependency array means this useEffect runs once when the component mounts
+  }, []);
 
   return (
     <div
@@ -68,9 +56,9 @@ const PropertyDrawer = ({
           <div className="flex flex-col gap-2">
             <h1 className="font-medium text-14px]">Property name</h1>
             <input
-              value={form.name}
+              value={form.propertyName}
               onChange={(e) =>
-                setForm({ ...form, name: e.target.value })
+                setForm({ ...form, propertyName: e.target.value })
               }
               className="text-black border border-gray-200 p-2 rounded-md"
             />
@@ -78,9 +66,9 @@ const PropertyDrawer = ({
           <div className="flex flex-col gap-2">
             <h1 className="font-medium text-14px]">Contact Name</h1>
             <input
-              value={form.contact_name}
+              value={form.contactName}
               onChange={(e) =>
-                setForm({ ...form, contact_name: e.target.value })
+                setForm({ ...form, contactName: e.target.value })
               }
               className="text-black border border-gray-200 p-2 rounded-md"
             />
@@ -88,9 +76,9 @@ const PropertyDrawer = ({
           <div className="flex flex-col gap-2">
             <h1 className="font-medium text-14px]">Phone number</h1>
             <input
-              value={form.phone}
+              value={form.phoneNumber}
               onChange={(e) =>
-                setForm({ ...form, phone: e.target.value })
+                setForm({ ...form, phoneNumber: e.target.value })
               }
               className="text-black border border-gray-200 p-2 rounded-md"
             />
@@ -100,9 +88,9 @@ const PropertyDrawer = ({
               Physical Address
             </h1>
             <input
-              value={form.address}
+              value={form.physicalAddress}
               onChange={(e) =>
-                setForm({ ...form, address: e.target.value })
+                setForm({ ...form, physicalAddress: e.target.value })
               }
               className="text-black border border-gray-200 p-2 rounded-md"
             />
@@ -110,9 +98,9 @@ const PropertyDrawer = ({
           <div className="flex flex-col gap-2">
             <h1 className="font-medium text-14px]">Dates:</h1>
             <input
-              value={form.date}
+              value={form.availableDates}
               onChange={(e) =>
-                setForm({ ...form, date: e.target.value })
+                setForm({ ...form, availableDates: e.target.value })
               }
               className="text-black border border-gray-200 p-2 rounded-md"
             />
@@ -120,8 +108,6 @@ const PropertyDrawer = ({
         </div>
       </div>
       <div className="flex flex-row gap-5 justify-end mt-4">
-        {" "}
-        {/* Added mt-4 for a little margin on top */}
         <button
           onClick={() => setOpenDrawer(false)}
           className="border border-gray-200 text-gray-600 rounded-md px-5 py-2"
@@ -133,11 +119,24 @@ const PropertyDrawer = ({
             setOpenDrawer(false);
             setProperties((prevItems: any) => [...prevItems, form]);
             setForm({
-              address: "",
-              contact_name: "",
-              date: "",
-              name: "",
-              phone: "",
+              physicalAddress: "",
+              contactName: "",
+              availableDates: "",
+              propertyName: "",
+              phoneNumber: "",
+              amenities: [],
+              buildings: [
+                {
+                  beds: [
+                    {
+                      name: "",
+                      quantity: 0,
+                    },
+                  ],
+                  roomName: "",
+                  roomType: "",
+                },
+              ],
             });
           }}
           className="bg-[#3ca39d] text-white rounded-md px-5 py-2"

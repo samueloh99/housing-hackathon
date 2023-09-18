@@ -10,7 +10,7 @@ const BuildingDrawer = ({
   buildingDrawer,
   setBuildingDrawer,
 }: DrawerProps) => {
-  const drawerRef = useRef(null);
+  const drawerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     function handleClickOutside(event: any) {
