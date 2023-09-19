@@ -10,6 +10,7 @@ import MainTab from "@/components/maintab";
 import BuildingDetails from "@/components/buildingDetails";
 import BuildingCard from "@/components/buildingCard";
 import { PropertyType } from "@/types/Property";
+import RoomTypeEditDrawer from "@/components/roomtypeEditDrawer";
 
 export default function Home() {
   const [screen, setScreen] = useState(1);
@@ -17,7 +18,6 @@ export default function Home() {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [amentDrawer, setAmentDrawer] = useState(false);
   const [buildingDrawer, setBuildingDrawer] = useState(false);
-  const [roomTypeDrawer, setRoomTypeDrawer] = useState(false);
 
   const [form, setForm] = useState<PropertyType>({
     amenities: [],
@@ -26,18 +26,7 @@ export default function Home() {
     phoneNumber: "",
     physicalAddress: "",
     propertyName: "",
-    buildings: [
-      {
-        beds: [
-          {
-            name: "",
-            quantity: 0,
-          },
-        ],
-        roomName: "",
-        roomType: "",
-      },
-    ],
+    buildings: [],
   });
 
   const [properties, setProperties] = useState<PropertyType[]>([]);
@@ -70,13 +59,9 @@ export default function Home() {
         <BuildingDrawer
           buildingDrawer={buildingDrawer}
           setBuildingDrawer={setBuildingDrawer}
-        />
-      )}
-
-      {roomTypeDrawer && (
-        <RoomTypeDrawer
-          roomTypeDrawer={roomTypeDrawer}
-          setRoomTypeDrawer={setRoomTypeDrawer}
+          setProperties={setProperties}
+          openProperties={openProperties}
+          properties={properties}
         />
       )}
 
@@ -90,7 +75,7 @@ export default function Home() {
             setAmentDrawer={setAmentDrawer}
             setBuildingDrawer={setBuildingDrawer}
             setOpenProperties={setOpenProperties}
-            setRoomTypeDrawer={setRoomTypeDrawer}
+            setProperties={setProperties}
           />
         )}
         {openProperties === 0 && (

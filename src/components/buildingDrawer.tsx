@@ -1,16 +1,25 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
+import { PropertyType } from "@/types/Property";
 interface DrawerProps {
   buildingDrawer: boolean;
   setBuildingDrawer: (x: boolean) => void;
+  setProperties: (x: PropertyType[]) => void;
+  properties: PropertyType[];
+  openProperties: number;
 }
 
 const BuildingDrawer = ({
   buildingDrawer,
   setBuildingDrawer,
+  setProperties,
+  openProperties,
+  properties,
 }: DrawerProps) => {
   const drawerRef = useRef<HTMLDivElement | null>(null);
+
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     function handleClickOutside(event: any) {
@@ -28,6 +37,20 @@ const BuildingDrawer = ({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleClickCreateBuilding = () => {
+    const updatedProperties = [...properties];
+    const newProperty = updatedProperties[openProperties - 1];
+
+    const newBuilding = {
+      name: inputValue,
+      rooms: [],
+    };
+
+    newProperty.buildings.push(newBuilding);
+    setBuildingDrawer(false);
+    setProperties(updatedProperties);
+  };
 
   return (
     <div
@@ -49,7 +72,11 @@ const BuildingDrawer = ({
         <div className="flex w-full gap-2 mt-10">
           <div className="flex flex-col w-full items-start justify-between cursor-pointer">
             <h1 className="text-[17px] font-bold">Building name</h1>
-            <input className="text-black border border-gray-200 p-2 rounded-md" />
+            <input
+              className="text-black border border-gray-200 p-2 rounded-md"
+              onChange={(e) => setInputValue(e.target.value)}
+              value={inputValue}
+            />
           </div>
         </div>
       </div>
@@ -61,9 +88,7 @@ const BuildingDrawer = ({
           Cancel
         </button>
         <button
-          onClick={() => {
-            setBuildingDrawer(false);
-          }}
+          onClick={() => handleClickCreateBuilding()}
           className="bg-[#3ca39d] text-white rounded-md px-5 py-2"
         >
           Create

@@ -5,16 +5,13 @@ export type PropertyType = {
   physicalAddress: string;
   propertyName: string;
   availableDates: string;
-  buildings: [
-    {
+  buildings: {
+    name: string;
+    rooms: {
+      dateRange: string;
       roomType: string;
       roomName: string;
-      beds: [
-        {
-          quantity: number;
-          name: string;
-        }
-      ];
-    }
-  ];
+      beds: { quantity: number; name: string }[];
+    }[];
+  }[];
 };

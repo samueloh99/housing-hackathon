@@ -1,4 +1,5 @@
 import { PropertyType } from "@/types/Property";
+import Table from "./table";
 
 interface BuildingCardProps {
   index: number;
@@ -27,6 +28,7 @@ const BuildingCard = ({
           </p>
         </div>
       </div>
+      {item.buildings.length > 0 && <Table items={item} />}
     </div>
   );
 };

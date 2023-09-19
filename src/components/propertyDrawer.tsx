@@ -125,18 +125,7 @@ const PropertyDrawer = ({
               propertyName: "",
               phoneNumber: "",
               amenities: [],
-              buildings: [
-                {
-                  beds: [
-                    {
-                      name: "",
-                      quantity: 0,
-                    },
-                  ],
-                  roomName: "",
-                  roomType: "",
-                },
-              ],
+              buildings: [],
             });
           }}
           className="bg-[#3ca39d] text-white rounded-md px-5 py-2"
